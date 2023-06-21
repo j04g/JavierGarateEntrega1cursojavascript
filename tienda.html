@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrega JAVASCRIPT III</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="contenedor_pagina_menu_header">
+        <h1 class="tooltip2">
+          CHEF LEON!
+        </h1>
+
+    </header>
+  <nav class="contenedor_pagina_menu_nav">
+    <ul class="nav_ul_li">
+      <li>
+        <a href="#">Inicio</a>
+      </li>
+      <li>
+        <a href="#">Carta</a>
+      </li>
+      <li>
+        <a href="#">Historia</a>
+      </li>
+      <li>
+        <a href="#">Franquicias</a>
+      </li>
+      <li>
+        <a href="#" id="pageLengua_dropdown">Lengua</a>
+        <div class="dropdown">
+          <button class="btn" style="border-left:1px solid #00050a">
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Español</a>
+            <a href="#">Inglés</a>
+            <a href="#">Francais</a>
+            <a href="#">
+              <ruby>
+                中文（简体）<rt>ㄏㄢˋ</rt>
+              </ruby>
+            </a>
+            <a href="#">
+              <ruby>
+                العربية
+              </ruby>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a href="#" target="_blank">Visitá la fan's page!</a>
+      </li>
+      <li>
+        <a href="#">Ir al final de página</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="header-container">
+      <h1>Dejate tentar. Para comenzar tu compra, deberás primero registrate como usuario y luego iniciar tu sesión. Recuerda conservar du contraseña!</h1>
+
+
+  
+
+    <form id="registro-form">
+      <h2>Registro de Usuario</h2>
+      <div class="form-group">
+        <label for="username">Nombre de Usuario:</label>
+        <input type="text" id="username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Teléfono:</label>
+        <input type="tel" id="phone" required>
+      </div>
+
+      <button type="submit">Registrarse</button>
+    </form>
+
+    <div id="sesion-container" class="hidden">
+      <form id="login-form">
+        <h2>Bienvenido <span id="welcome-username"></span>!</h2>
+        <h3>Iniciar Sesión</h3>
+        <div class="form-group">
+          <label for="login-username">Nombre de Usuario:</label>
+          <input type="text" id="login-username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Contraseña:</label>
+          <input type="password" id="login-password" required>
+        </div>
+
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+    </div>
+  </main>
+
+  <section>
+    <div class="container">
+      <div id="datos-personales-container" class="hidden">
+        <form id="datos-personales-form">
+          <h2>Datos Personales</h2>
+
+          <div class="form-group">
+            <label for="modalidad-pago">Modalidad de Pago:</label>
+            <select id="modalidad-pago" required>
+              <option value="tarjeta-debito">Tarjeta de Débito</option>
+              <option value="tarjeta-credito">Tarjeta de Crédito</option>
+              <option value="mercadopago">MercadoPago</option>
+              <option value="transferencia">Transferencia</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="cbu-tarjeta">CBU o Número de Tarjeta:</label>
+            <input type="text" id="cbu-tarjeta" required>
+          </div>
+
+          <div class="form-group">
+            <label for="tres-digitos">3 Dígitos:</label>
+            <input type="text" id="tres-digitos" required>
+          </div>
+
+          <div class="form-group">
+            <label for="opciones-envio">Opciones de Envío:</label>
+            <select id="opciones-envio" required>
+              <option value="retiro-local">Retiro en el Local</option>
+              <option value="delivery">Delivery</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit">Guardar Datos</button>
+            <button type="reset">Restablecer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <h1>Carrito Virtual</h1>
+
+  <!-- Filtros -->
+  <div class="filtros">
+    <div class="filtro-item">
+      <label for="categoria">Filtrar por categoría:</label>
+      <select id="categoria" onchange="filtrarPorCategoria(this.value)">
+        <option value="">Todos</option>
+        <option value="desayunos y meriendas">Desayunos y Meriendas</option>
+        <option value="platos principales">Platos Principales</option>
+        <option value="tortas, postres y delicias">Tortas, Postres y Delicias</option>
+      </select>
+    </div>
+    <div class="filtro-item">
+      <label for="min-precio">Precio mínimo:</label>
+      <input type="number" id="min-precio" min="0" onchange="filtrarPorPrecio(parseInt(this.value), parseInt(document.getElementById('max-precio').value))">
+    </div>
+    <div class="filtro-item">
+      <label for="max-precio">Precio máximo:</label>
+      <input type="number" id="max-precio" min="0" onchange="filtrarPorPrecio(parseInt(document.getElementById('min-precio').value), parseInt(this.value))">
+    </div>
+  </div>
+
+  <!-- Carrito -->
+  <div id="carrito"></div>
+
+<!-- Agrega esto debajo del formulario de datos personales -->
+<div id="carrito-container">
+  <h2>Resumen de compra</h2>
+  <div id="productos-carrito"></div>
+</div>
+
+<section class="TiendaOnLine_section_flex-container">
+  <h2 id="usernameHeader"></h2>
+  <form id="carritoForm">
+    <div>
+      <label for="orderNumberInput">N° de orden:</label>
+      <input type="text" id="orderNumberInput" disabled>
+    </div>
+    <div>
+      <label for="finalAmountInput">Monto final:</label>
+      <input type="text" id="finalAmountInput">
+    </div>
+    <div>
+      <label for="cartSummaryInput">Resumen de items:</label>
+      <input type="text" id="cartSummaryInput" disabled>
+    </div>
+    <div>
+      <input type="checkbox" id="confirmCheckbox">
+      <label for="confirmCheckbox">Confirmar la orden</label>
+    </div>
+    <div>
+      <button type="submit" id="realizarCompraBtn">Realizar compra</button>
+    </div>
+  </form>
+</section>
+
+
+
+ 
+
+  <script src="styles.js"></script>
+</body>
+
+<footer>
+  <div class="footer-container">
+    <p>Derechos de autor &copy; 2023 EntregaJavascriptIII</p>
+  </div>
+</footer>
+
+</html>
